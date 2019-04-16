@@ -18,4 +18,7 @@ extern okapi::ChassisControllerIntegrated drive;
 extern okapi::Motor armMtr;
 extern okapi::Motor clawMtr;
 
+extern bool alliance;
+extern int position;
+
 #endif

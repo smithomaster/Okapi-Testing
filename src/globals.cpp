@@ -21,3 +21,6 @@ okapi::ChassisControllerIntegrated drive = okapi::ChassisControllerFactory::crea
     okapi::AbstractMotor::gearset::green,
     {4_in, 11.5_in}
 );
+
+bool alliance = false;// false red, true blue
+int position = 0;
