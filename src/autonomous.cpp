@@ -13,8 +13,30 @@
  * from where it left off.
  */
 void autonomous() {
+    using namespace okapi;
+
     // false red, true blue
-    if (alliance == false){
-        
+    // 0 left, 1 right
+
+    if (alliance == false) {
+        if (position  == 0) {
+            drive.turnAngle(-90_deg);
+            drive.moveDistance(3.5_ft);
+        } else if (position == 1) {
+            drive.turnAngle(-90_deg);
+            drive.moveDistance(7.5_ft);
+        } else {
+            drive.moveDistance(2_ft);
+        }
+    } else if (alliance == true) {
+        if (position  == 0) {
+            drive.turnAngle(90_deg);
+            drive.moveDistance(7.5_ft);
+        } else if (position == 1) {
+            drive.turnAngle(90_deg);
+            drive.moveDistance(3.5_ft);
+        } else {
+            drive.moveDistance(2_ft);
+        }
     }
 }
