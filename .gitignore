@@ -6,3 +6,7 @@
 /bin/*.elf
 /bin/*.o
 /compile_commands.json
+bin/*
+bin/*.bin
+bin/*.elf
+bin/*.o
