@@ -1,13 +1,26 @@
 #include "main.h"
+#include "globals.hpp"
 
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+lv_obj_t * allianceButton;
+lv_obj_t * allianceButtonLabel;
+
+lv_style_t blueAllianceStyle; //relesed style
+lv_style_t redAllianceStyle; //pressed style
+
+bool alliance = false; // false red, true blue
+
+static lv_res_t btn_click_action(lv_obj_t * btn)
+{
+    if (alliance == false) {
+        alliance = true;
+        lv_label_set_text(allianceButtonLabel, "Red Alliance");
+    }
+    else if (alliance == true) {
+        alliance = false;
+        lv_label_set_text(allianceButtonLabel, "Blue Alliance");
+    }
+
+    return LV_RES_OK;
 }
 
 /**
@@ -17,10 +30,29 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	lv_style_copy(&blueAllianceStyle, &lv_style_plain);
+	blueAllianceStyle.body.main_color = LV_COLOR_MAKE(0, 0, 255);
+	blueAllianceStyle.body.grad_color = LV_COLOR_MAKE(255, 255, 255);
+	blueAllianceStyle.body.radius = 0;
+	blueAllianceStyle.text.color = LV_COLOR_MAKE(0,0,0);
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	lv_style_copy(&redAllianceStyle, &lv_style_plain);
+	redAllianceStyle.body.main_color = LV_COLOR_MAKE(255, 0, 0);
+	redAllianceStyle.body.grad_color = LV_COLOR_MAKE(255, 255, 255);
+	redAllianceStyle.body.radius = 0;
+	redAllianceStyle.text.color = LV_COLOR_MAKE(0,0,0);
+
+	allianceButton = lv_btn_create(lv_scr_act(), NULL); //create button, lv_scr_act() is deafult screen object
+	lv_obj_set_free_num(allianceButton, 0); //set button is to 0
+	lv_btn_set_action(allianceButton, LV_BTN_ACTION_CLICK, btn_click_action); //set function to be called on button click
+	lv_btn_set_style(allianceButton, LV_BTN_STYLE_TGL_REL, &blueAllianceStyle); //set the relesed style
+	lv_btn_set_style(allianceButton, LV_BTN_STYLE_TGL_PR, &redAllianceStyle); //set the pressed style
+	lv_obj_set_size(allianceButton, 200, 50); //set the button size
+	lv_obj_align(allianceButton, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10); //set the position to top mid
+    lv_btn_set_state(allianceButton, LV_BTN_STATE_TGL_REL);
+
+	allianceButtonLabel = lv_label_create(allianceButton, NULL); //create label and puts it inside of the button
+	lv_label_set_text(allianceButtonLabel, "Blue Alliance"); //sets label text
 }
 
 /**
