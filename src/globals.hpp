@@ -8,6 +8,10 @@ extern int CLAW_MOTOR_PORT;
 extern int LEFT_MOTOR_PORT;
 extern int RIGHT_MOTOR_PORT;
 
+extern double liftkP;
+extern double liftkI;
+extern double liftkD;
+
 extern okapi::Controller master;
 extern okapi::ControllerButton armUpButton;
 extern okapi::ControllerButton armDownButton;
@@ -18,7 +22,10 @@ extern okapi::ChassisControllerIntegrated drive;
 extern okapi::Motor armMtr;
 extern okapi::Motor clawMtr;
 
+extern okapi::AsyncPosPIDController armController;
+
 extern bool alliance;
 extern int position;
+
 
 #endif

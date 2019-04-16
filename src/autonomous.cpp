@@ -21,10 +21,14 @@ void autonomous() {
     if (alliance == false) {
         if (position  == 0) {
             drive.turnAngle(-90_deg);
-            drive.moveDistance(3.5_ft);
+            drive.moveDistanceAsync(3.5_ft);
+            armController.setTarget(-90);
+            drive.waitUntilSettled();
         } else if (position == 1) {
             drive.turnAngle(-90_deg);
             drive.moveDistance(7.5_ft);
+            armController.setTarget(-90);
+            drive.waitUntilSettled();
         } else {
             drive.moveDistance(2_ft);
         }
@@ -32,9 +36,13 @@ void autonomous() {
         if (position  == 0) {
             drive.turnAngle(90_deg);
             drive.moveDistance(7.5_ft);
+            armController.setTarget(-90);
+            drive.waitUntilSettled();
         } else if (position == 1) {
             drive.turnAngle(90_deg);
             drive.moveDistance(3.5_ft);
+            armController.setTarget(-90);
+            drive.waitUntilSettled();
         } else {
             drive.moveDistance(2_ft);
         }
